@@ -3,29 +3,29 @@ using MXMDesafio.WorkerService;
 using MXMDesafio.WorkerService.Application.Interfaces;
 using MXMDesafio.WorkerService.Application.Services;
 
-const string NomeServico = "Cotacao Service";
+const string ServiceName = "Cotação Service";
 
 if (args is { Length: 1 })
 {
     try
     {
         string executablePath =
-            Path.Combine(AppContext.BaseDirectory, "CotacaoService.exe");
+            Path.Combine(AppContext.BaseDirectory, "MXMDesafio.WorkerService.exe");
 
         if (args[0] is "/Install")
         {
             await Cli.Wrap("sc")
-                .WithArguments(new[] { "create", NomeServico, $"binPath={executablePath}", "start=delayed-auto", @"obj=NT AUTHORITY\LocalService" })
+                .WithArguments(new[] { "create", ServiceName, $"binPath={executablePath}", "start=auto" })
                 .ExecuteAsync();
         }
         else if (args[0] is "/Uninstall")
         {
             await Cli.Wrap("sc")
-                .WithArguments(new[] { "stop", NomeServico })
+                .WithArguments(new[] { "stop", ServiceName })
                 .ExecuteAsync();
 
             await Cli.Wrap("sc")
-                .WithArguments(new[] { "delete", NomeServico })
+                .WithArguments(new[] { "delete", ServiceName })
                 .ExecuteAsync();
         }
     }
@@ -40,6 +40,10 @@ if (args is { Length: 1 })
 
 var builder = Host.CreateApplicationBuilder(args);
 
+builder.Services.AddWindowsService(options =>
+{
+    options.ServiceName = "Cotação Service";
+});
 
 builder.Services.AddHostedService<Worker>()
     .AddHostedService<CotacaoWorker>()
