@@ -2,6 +2,7 @@
 using MXMDesafio.WorkerService;
 using MXMDesafio.WorkerService.Application.Interfaces;
 using MXMDesafio.WorkerService.Application.Services;
+using MXMDesafio.WorkerService.Infra.Services;
 
 const string ServiceName = "Cotação Service";
 
@@ -47,9 +48,12 @@ builder.Services.AddWindowsService(options =>
 
 builder.Services.AddHostedService<Worker>()
     .AddHostedService<CotacaoWorker>()
+    .AddHostedService<HistoricoWorker>()
     .AddSingleton<IRequisicaoCotacaoService, RequisicaoCotacaoService>()
+    .AddSingleton<IRequisicaoCotacaoPeriodoService, RequisicaoCotacaoPeriodoService>()
     .AddSingleton<IInformacaoMercadoService, InformacaoMercadoService>()
-    .AddSingleton<IArquivoService, ArquivoService>();
+    .AddSingleton<IArquivoHistoricoService, ArquivoHistoricoService>()
+    .AddSingleton<IArquivoLogService, ArquivoService>();
 
 
 var host = builder.Build();

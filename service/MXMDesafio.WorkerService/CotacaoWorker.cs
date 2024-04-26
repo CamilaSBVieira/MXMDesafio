@@ -1,5 +1,4 @@
 ﻿using MXMDesafio.WorkerService.Application.Interfaces;
-using MXMDesafio.WorkerService.Domain.Models;
 using MXMDesafio.WorkerService.FuncAuxiliares;
 
 namespace MXMDesafio.WorkerService
@@ -7,7 +6,7 @@ namespace MXMDesafio.WorkerService
     public class CotacaoWorker : BackgroundService
     {
         private readonly IRequisicaoCotacaoService _requisicaoService;
-        private readonly IArquivoService _arquivoService;
+        private readonly IArquivoLogService _arquivoService;
         private readonly IInformacaoMercadoService _informacaoMercadoService;
         private readonly IHostApplicationLifetime _applicationLifetime;
         private readonly ILogger<Worker> _logger;
@@ -16,7 +15,7 @@ namespace MXMDesafio.WorkerService
 
         public CotacaoWorker(
             IRequisicaoCotacaoService requisicaoService,
-            IArquivoService arquivoService,
+            IArquivoLogService arquivoService,
             IInformacaoMercadoService informacaoMercadoService,
             IHostApplicationLifetime applicationLifetime,
             ILogger<Worker> logger

@@ -2,19 +2,18 @@
 
 namespace MXMDesafio.WorkerService.Application.Services
 {
-    public class ArquivoService : IArquivoLogService
+    public class ArquivoHistoricoService : IArquivoHistoricoService
     {
         private string caminhoPasta;
         private string nomeArquivo;
         private string caminhoArquivo;
-        public ArquivoService()
+        public ArquivoHistoricoService()
         {
             caminhoPasta = AppDomain.CurrentDomain.BaseDirectory + @"/Logs";
-            nomeArquivo = "ServicoLog_.txt";
+            nomeArquivo = "HistoricoCotacoes_.txt";
             caminhoArquivo = Path.Combine(caminhoPasta, nomeArquivo);
 
         }
-
         public bool ArquivoJaExiste()
         {
             if (!File.Exists(caminhoArquivo))
@@ -23,6 +22,7 @@ namespace MXMDesafio.WorkerService.Application.Services
             }
             return true;
         }
+
         public bool ArquivoVazio()
         {
             if (new FileInfo(caminhoArquivo).Length == 0)
@@ -30,6 +30,13 @@ namespace MXMDesafio.WorkerService.Application.Services
                 return true;
             }
             return false;
+        }
+
+        public DateTime UltimaAtualizacao()
+        {
+            FileInfo infoArquivo = new FileInfo(caminhoArquivo);
+            var ultimaAtualizacao = infoArquivo.LastWriteTime;
+            return ultimaAtualizacao;
         }
         public void SalvarEmArquivo(string msg)
         {
@@ -51,5 +58,6 @@ namespace MXMDesafio.WorkerService.Application.Services
                 }
             }
         }
+
     }
 }
