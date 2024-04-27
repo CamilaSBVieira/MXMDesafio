@@ -21,7 +21,7 @@ namespace MXMDesafio.WorkerService.Domain.Models
             texto.AppendLine($"Cotação do dia:");
             texto.AppendLine(Texto.Identar($"Cotação de Compra: {Compra}", 4));
             texto.AppendLine(Texto.Identar($"Cotação de Venda: {Venda}", 4));
-            texto.AppendLine(Texto.Identar($"Data e Hora da Cotação: {Data}", 4));
+            texto.Append(Texto.Identar($"Data e Hora da Cotação: {Data}", 4));
             return texto.ToString();
         }
     }

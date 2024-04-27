@@ -1,4 +1,5 @@
 ﻿using MXMDesafio.WorkerService.Application.Interfaces;
+using System.Globalization;
 
 namespace MXMDesafio.WorkerService.Application.Services
 {
@@ -32,12 +33,6 @@ namespace MXMDesafio.WorkerService.Application.Services
             return false;
         }
 
-        public DateTime UltimaAtualizacao()
-        {
-            FileInfo infoArquivo = new FileInfo(caminhoArquivo);
-            var ultimaAtualizacao = infoArquivo.LastWriteTime;
-            return ultimaAtualizacao;
-        }
         public void SalvarEmArquivo(string msg)
         {
             if (!Directory.Exists(caminhoPasta))
@@ -59,5 +54,19 @@ namespace MXMDesafio.WorkerService.Application.Services
             }
         }
 
+        public DateTime DataUltimaAtualizacao()
+        {
+            if (ArquivoJaExiste())
+            {
+                var ultimaLinha = File.ReadLines(caminhoArquivo).Last();
+                string formato = "dd/MM/yyyy HH:mm:ss";
+                string datePart = ultimaLinha.Substring(ultimaLinha.IndexOf(":") + 2);
+
+                DateTime ultimaAtt = DateTime.ParseExact(datePart, formato, CultureInfo.InvariantCulture);
+                return ultimaAtt.AddDays(1);
+            }
+            else
+                return DateTime.Now;
+        }
     }
 }

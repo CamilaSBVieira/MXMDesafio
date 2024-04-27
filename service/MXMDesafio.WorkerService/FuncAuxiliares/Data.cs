@@ -70,13 +70,6 @@ namespace MXMDesafio.WorkerService.FuncAuxiliares
             var milisegundos = QuandoMercadoAbre();
             return TimeSpan.FromMilliseconds(milisegundos).Humanize(3);
         }
-        public static int DeAgoraAteCinco()
-        {
-            DateTime agora = DateTime.Now;
-            DateTime asCincoAmanha = new DateTime(agora.Year, agora.Month, agora.Day, 17, 0, 0).AddDays(1);
-            TimeSpan tempoAteAsCinco = asCincoAmanha - agora;
-
-            return (int)tempoAteAsCinco.TotalMilliseconds;
-        }
+        
     }
 }

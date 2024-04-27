@@ -2,7 +2,6 @@
 {
     public interface IArquivoHistoricoService : IArquivoService
     {
-        DateTime UltimaAtualizacao();
-
+        DateTime DataUltimaAtualizacao();
     }
 }
