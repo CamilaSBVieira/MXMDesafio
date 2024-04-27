@@ -38,7 +38,7 @@ Projeto desenvolvido para o Desafio MXM. O objetivo é criar um serviço para SO
 
 - #### Para rodar a aplicação usando Docker:
 1. Tenha o **Docker** instalado em sua máquina
-2. Nas **Configurações de Soluções** selecione **Docker**
+2. Selecione o **Docker** para rodar a aplicação 
 3. Pressione a tecla **F5**
 
 - #### Para instalar o serviço em sua máquina (Sistema Operacional Windows)
