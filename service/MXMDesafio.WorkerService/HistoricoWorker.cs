@@ -8,7 +8,6 @@ namespace MXMDesafio.WorkerService
         private readonly IArquivoHistoricoService _arquivoService;
         private readonly IHostApplicationLifetime _applicationLifetime;
         private readonly ILogger<Worker> _logger;
-
         public HistoricoWorker(
             IRequisicaoCotacaoPeriodoService requisicaoService,
             IArquivoHistoricoService arquivoService,
@@ -35,16 +34,14 @@ namespace MXMDesafio.WorkerService
                             foreach(var c in cotacoes)
                             {
                                 _arquivoService.SalvarEmArquivo(c.ToString());
-                                _logger.LogInformation(c.ToString());
                             }
                         }
                         else
                             await Task.CompletedTask;
                     }
-                    catch (Exception ex)
+                    catch (HttpRequestException ex)
                     {
-                        _arquivoService.SalvarEmArquivo($"Erro na requisição: {ex.Message}");
-                        _applicationLifetime.StopApplication();
+                        _logger.LogInformation($"Erro na requisição: {ex.Message}");
                     }
                     await Task.Delay(5000);
             }

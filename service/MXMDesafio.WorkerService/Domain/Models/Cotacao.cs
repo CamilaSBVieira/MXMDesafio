@@ -18,9 +18,9 @@ namespace MXMDesafio.WorkerService.Domain.Models
         public override string ToString()
         {
             StringBuilder texto = new StringBuilder();
-            texto.AppendLine($"Cotação do dia:");
-            texto.AppendLine(Texto.Identar($"Cotação de Compra: {Compra}", 4));
-            texto.AppendLine(Texto.Identar($"Cotação de Venda: {Venda}", 4));
+            texto.AppendLine($"Cotação:");
+            texto.AppendLine(Texto.Identar($"Compra: R$ {Compra}", 4));
+            texto.AppendLine(Texto.Identar($"Venda: R$ {Venda}", 4));
             texto.Append(Texto.Identar($"Data e Hora da Cotação: {Data}", 4));
             return texto.ToString();
         }
